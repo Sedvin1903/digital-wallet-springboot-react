@@ -1,0 +1,44 @@
+---
+version: "3.1"
+services:
+  rabbitmq:
+    image: rabbitmq:3.10.5-management
+    restart: no
+    ports:
+      - 5672:5672
+      - 15672:15672
+    container_name: rabbitmq-container
+  mongo:
+    image: mongo
+    restart: always
+    container_name: mongodb-container
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user1
+      MONGO_INITDB_ROOT_PASSWORD: Chennai@123
+    healthcheck:
+      test: exit 0
+  mysql_user:
+    image: mysql:latest
+    ports:
+      - 3307:3306
+    container_name: mysql-container_user
+    environment:
+      MYSQL_USER: user1
+      MYSQL_PASSWORD: chennai@123
+      MYSQL_DATABASE: userdb
+      MYSQL_ROOT_PASSWORD: root
+    healthcheck:
+      test: exit 0
+  mysql_wallet:
+    image: mysql:latest
+    ports:
+      - 3308:3306
+    container_name: mysql-container_wallet
+    environment:
+      MYSQL_USER: user1
+      MYSQL_PASSWORD: chennai@123
+      MYSQL_DATABASE: walletdb
+      MYSQL_ROOT_PASSWORD: root
+    healthcheck:
+      test: exit 0
+
